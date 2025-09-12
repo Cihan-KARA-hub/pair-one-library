@@ -17,8 +17,8 @@ public class BookController {
 
     public BookController(BookService bookService) {
         this.bookService = bookService;
-
     }
+
 
     //Create
     @PostMapping()
@@ -35,7 +35,7 @@ public class BookController {
     }
 
     //delete
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{bookId}")
     public String deleteBook(@PathVariable Integer bookId) {
         return bookService.delete(bookId);
     }

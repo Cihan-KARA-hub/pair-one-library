@@ -1,11 +1,26 @@
 package com.pairone.library.dto.book;
 
+import com.pairone.library.dto.bookinfo.BookInfoCreateDto;
+
+import java.util.List;
+
 public class BookUpdateReq {
     private int id;
+    private String name;
+    private int pageCount;
     private int editionNo;
-    private Integer bookinfoId;
+    private BookInfoCreateDto bookinfoId;
     private Integer publisherId;
     private Integer categoryId;
+    private List<Integer> authorId;
+
+    public Integer getPublisherId() {
+        return publisherId;
+    }
+
+    public void setPublisherId(Integer publisherId) {
+        this.publisherId = publisherId;
+    }
 
     public int getId() {
         return id;
@@ -15,12 +30,20 @@ public class BookUpdateReq {
         this.id = id;
     }
 
-    public Integer getBookinfoId() {
-        return bookinfoId;
+    public String getName() {
+        return name;
     }
 
-    public void setBookinfoId(Integer bookinfoId) {
-        this.bookinfoId = bookinfoId;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
     }
 
     public int getEditionNo() {
@@ -31,12 +54,12 @@ public class BookUpdateReq {
         this.editionNo = editionNo;
     }
 
-    public Integer getPublisherId() {
-        return publisherId;
+    public BookInfoCreateDto getBookinfoId() {
+        return bookinfoId;
     }
 
-    public void setPublisherId(Integer publisherId) {
-        this.publisherId = publisherId;
+    public void setBookinfoId(BookInfoCreateDto bookinfoId) {
+        this.bookinfoId = bookinfoId;
     }
 
     public Integer getCategoryId() {
@@ -46,5 +69,14 @@ public class BookUpdateReq {
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
+
+    public List<Integer> getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(List<Integer> authorId) {
+        this.authorId = authorId;
+    }
+
 
 }

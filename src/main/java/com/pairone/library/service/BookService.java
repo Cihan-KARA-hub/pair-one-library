@@ -1,16 +1,13 @@
 package com.pairone.library.service;
 
-import com.pairone.library.dto.book.BookCreateReq;
-import com.pairone.library.dto.book.BookCreateRes;
-import com.pairone.library.dto.book.BookListDto;
-import com.pairone.library.dto.book.BookUpdateReq;
+import com.pairone.library.dto.book.*;
 
 import java.util.List;
 
 public interface BookService {
     BookCreateRes create(BookCreateReq req);
 
-    void update(BookUpdateReq book);
+    BookUpdateRes update(BookUpdateReq req);
 
     String delete(Integer id);
 

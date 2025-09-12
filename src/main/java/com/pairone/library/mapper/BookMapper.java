@@ -34,13 +34,20 @@ public class BookMapper {
         return book;
     }
 
-    public Book BookUpdateReqToEntity(BookUpdateReq bookUpdateReq) {
+    public Book BookUpdateReqToEntity(BookUpdateReq req,
+                                      BookInfo bookInfo,
+                                      Publisher publisher,
+                                      List<Author> authors,
+                                      Category category) {
         Book book = new Book();
-        book.setId(bookUpdateReq.getId());
-        book.setBookinfoId(bookUpdateReq.getBookinfoId());
-        book.setEditionNo(bookUpdateReq.getEditionNo());
-        book.setPublisher(bookUpdateReq.getPublisherId());
-        book.setCategory(bookUpdateReq.getCategoryId());
+        book.setId(req.getId());
+        book.setName(req.getName());
+        book.setPageCount(req.getPageCount());
+        book.setEditionNo(req.getEditionNo());
+        book.setBookinfoId(bookInfo);
+        book.setPublisher(publisher);
+        book.setCategory(category);
+        book.setAuthors(authors);
         return book;
 
     }

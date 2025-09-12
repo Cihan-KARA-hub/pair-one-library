@@ -1,10 +1,7 @@
 package com.pairone.library.service;
 
 import com.pairone.library.dto.author.AuthorDto;
-import com.pairone.library.dto.book.BookCreateReq;
-import com.pairone.library.dto.book.BookCreateRes;
-import com.pairone.library.dto.book.BookListDto;
-import com.pairone.library.dto.book.BookUpdateReq;
+import com.pairone.library.dto.book.*;
 import com.pairone.library.entity.*;
 import com.pairone.library.mapper.AuthorMapper;
 import com.pairone.library.mapper.BookInfoMapper;
@@ -21,14 +18,13 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class BookServiceImpl {
+public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final AuthorService authorService;
     private final AuthorMapper authorMapper;
     private final BookInfoServiceImpl bookInfoService;
-    private final BookInfoMapper bookInfoMapper;
     private final PublisherService publisherService;
     private final CategoryService categoryService;
 
@@ -38,16 +34,13 @@ public class BookServiceImpl {
                            AuthorService authorService,
                            AuthorMapper authorMapper,
                            BookInfoServiceImpl bookInfoService,
-                           BookInfoMapper bookInfoMapper,
                            PublisherService publisherService, CategoryService categoryService) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
         this.authorService = authorService;
         this.authorMapper = authorMapper;
         this.bookInfoService = bookInfoService;
-        this.bookInfoMapper = bookInfoMapper;
         this.publisherService = publisherService;
-
         this.categoryService = categoryService;
     }
 
@@ -65,10 +58,17 @@ public class BookServiceImpl {
     }
 
 
-    public void update(BookUpdateReq book) {
-        bookRepository.findById(book.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "book not found "));
-        Book bookEntity = bookMapper.BookUpdateReqToEntity(book);
-        bookRepository.save(bookEntity);
+    public BookUpdateRes update(BookUpdateReq req) {
+        bookRepository.findById(req.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "book not found "));
+        List<AuthorDto> authorDtos = req.getAuthorId().stream()
+                .map(authorService::getAuthorById)
+                .toList();
+        List<Author> authors = authorMapper.mapToEntityList(authorDtos);
+        BookInfo bookInfo = bookInfoService.save(req.getBookinfoId());
+        Publisher publisher = publisherService.bookServiceGetPublisher(req.getPublisherId());
+        Category category = categoryService.getCategoryId(req.getCategoryId());
+        Book resBook = bookRepository.save(bookMapper.BookUpdateReqToEntity(req, bookInfo, publisher, authors, category));
+        return new BookUpdateRes(req.getName(), "Book Updated");
     }
 
     public String delete(Integer id) {

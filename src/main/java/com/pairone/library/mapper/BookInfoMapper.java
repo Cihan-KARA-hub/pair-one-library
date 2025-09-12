@@ -1,5 +1,6 @@
 package com.pairone.library.mapper;
 
+import com.pairone.library.dto.bookinfo.BookGetResponse;
 import com.pairone.library.dto.bookinfo.BookInfoCreateDto;
 import com.pairone.library.entity.BookInfo;
 import org.springframework.stereotype.Component;
@@ -35,4 +36,19 @@ public class BookInfoMapper {
 
         return entity;
     }
-}
+
+    public BookGetResponse bookGetResponseInfo(BookInfo entity) {
+        return new BookGetResponse(
+                entity.getBookId(),
+                entity.getIsbn(),
+                entity.getTitle(),
+                entity.getStatus(),
+                entity.getType(),
+                entity.getLanguage(),
+                entity.getCondition(),
+                entity.getCopyCount(),
+                entity.getLocation(),
+                entity.getBarcode());
+    }
+    }
+

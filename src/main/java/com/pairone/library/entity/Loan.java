@@ -19,7 +19,7 @@ public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "loan_id")
-    private Long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
@@ -31,13 +31,66 @@ public class Loan {
 
     @Column(name = "request_date", nullable = false)
     private OffsetDateTime requestDate;
-
     @Column(name = "due_date", nullable = false)
     private OffsetDateTime dueDate;
-
     @Column(name = "return_date")
     private OffsetDateTime returnDate;
-
     @Column(name = "status", length = 20, nullable = false)
     private String status;
+
+    public OffsetDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(OffsetDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public OffsetDateTime getRequestDate() {
+        return requestDate;
+    }
+
+    public void setRequestDate(OffsetDateTime requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    public OffsetDateTime getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(OffsetDateTime returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

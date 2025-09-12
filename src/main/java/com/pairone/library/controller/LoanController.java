@@ -24,20 +24,21 @@ public class LoanController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LoanResponseDto> getLoanById(@PathVariable Long id) {
+    public ResponseEntity<LoanResponseDto> getLoanById(@PathVariable int id) {
         LoanResponseDto loan = loanService.getLoanById(id);
         return ResponseEntity.ok(loan);
     }
 
     @PostMapping
-    public ResponseEntity<LoanResponseDto> createLoan(@RequestBody LoanCreateDto loanCreateDto) {
-        LoanResponseDto createdLoan = loanService.createLoan(loanCreateDto);
+    public ResponseEntity<
+            LoanCreateResponseDto> createLoan(@RequestBody LoanCreateDto loanCreateDto) {
+        LoanCreateResponseDto createdLoan = loanService.createLoan(loanCreateDto);
         return ResponseEntity.ok(createdLoan);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<LoanResponseDto> updateLoan(
-            @PathVariable Long id,
+            @PathVariable Integer id,
             @RequestBody LoanUpdateDto loanUpdateDto) {
         LoanResponseDto updatedLoan = loanService.updateLoan(id, loanUpdateDto);
         return ResponseEntity.ok(updatedLoan);
@@ -45,9 +46,8 @@ public class LoanController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteLoan(
-            @PathVariable Long id,
-            @RequestBody(required = false) LoanDeleteDto loanDeleteDto) {
-        loanService.deleteLoan(id, loanDeleteDto);
+            @PathVariable Integer id) {
+        loanService.deleteLoan(id);
         return ResponseEntity.ok("Loan kaydı silindi. ID: " + id);
     }
 }

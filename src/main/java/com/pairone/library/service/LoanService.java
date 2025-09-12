@@ -4,6 +4,7 @@ import com.pairone.library.dto.loan.*;
 import com.pairone.library.entity.Loan;
 import com.pairone.library.entity.Book;
 import com.pairone.library.entity.Member;
+import com.pairone.library.mapper.LoanMapper;
 import com.pairone.library.repository.LoanRepository;
 import com.pairone.library.repository.BookRepository;
 import com.pairone.library.repository.MemberRepository;
@@ -49,13 +50,13 @@ public class LoanService {
                 .collect(Collectors.toList());
     }
 
-    public LoanResponseDto getLoanById(Long id) {
+    public LoanResponseDto getLoanById(int id) {
         Loan loan = loanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Loan bulunamadı: " + id));
         return mapToResponseDto(loan);
     }
 
-    public LoanResponseDto updateLoan(Long id, LoanUpdateDto dto) {
+    public LoanResponseDto updateLoan(Integer id, LoanUpdateDto dto) {
         Loan loan = loanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Loan bulunamadı: " + id));
 

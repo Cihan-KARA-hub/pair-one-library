@@ -1,7 +1,7 @@
 package com.pairone.library.dto.loan;
 
 public class LoanListDto {
-    private Long id;
+    private Integer id;
     private String bookTitle;
     private String memberName;
     private String requestDate;  // Tarih String olarak tutuluyor
@@ -9,11 +9,11 @@ public class LoanListDto {
     private String status;
 
     // Getter & Setter
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

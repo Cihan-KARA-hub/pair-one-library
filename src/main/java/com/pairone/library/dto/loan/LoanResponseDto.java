@@ -1,10 +1,10 @@
 package com.pairone.library.dto.loan;
 
 public class LoanResponseDto {
-    private Long id;
-    private Long bookId;
+    private int id;
+    private int bookId;
     private String bookTitle;
-    private Long memberId;
+    private int memberId;
     private String memberName;
     private String requestDate;
     private String dueDate;
@@ -12,19 +12,19 @@ public class LoanResponseDto {
     private String status;
 
     // Getter & Setter
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getBookId() {
+    public int getBookId() {
         return bookId;
     }
 
-    public void setBookId(Long bookId) {
+    public void setBookId(int bookId) {
         this.bookId = bookId;
     }
 
@@ -36,11 +36,11 @@ public class LoanResponseDto {
         this.bookTitle = bookTitle;
     }
 
-    public Long getMemberId() {
+    public int getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Long memberId) {
+    public void setMemberId(int memberId) {
         this.memberId = memberId;
     }
 

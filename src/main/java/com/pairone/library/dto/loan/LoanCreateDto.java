@@ -1,42 +1,61 @@
 package com.pairone.library.dto.loan;
 
+import java.time.OffsetDateTime;
+
 public class LoanCreateDto {
-    private Long bookId;
-    private Long memberId;
-    private String requestDate;
-    private String dueDate;
+    private Integer bookId;
+    private Integer memberId;
+    private OffsetDateTime requestDate;
+    private OffsetDateTime dueDate;
     private String status;
+    private OffsetDateTime returnDate;
+
+    public OffsetDateTime getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(OffsetDateTime returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     // Getter & Setter
-    public Long getBookId() {
+    public Integer getBookId() {
         return bookId;
     }
 
-    public void setBookId(Long bookId) {
+    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 
-    public Long getMemberId() {
+    public Integer getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(Long memberId) {
+    public void setMemberId(Integer memberId) {
         this.memberId = memberId;
     }
 
-    public String getRequestDate() {
+    public OffsetDateTime getRequestDate() {
         return requestDate;
     }
 
-    public void setRequestDate(String requestDate) {
+    public void setRequestDate(OffsetDateTime requestDate) {
         this.requestDate = requestDate;
     }
 
-    public String getDueDate() {
+    public OffsetDateTime getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(OffsetDateTime dueDate) {
         this.dueDate = dueDate;
     }
 

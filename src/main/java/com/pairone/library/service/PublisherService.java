@@ -1,4 +1,5 @@
 package com.pairone.library.service;
+
 import com.pairone.library.dto.publisher.Request.PublisherCreateRequest;
 import com.pairone.library.dto.publisher.Request.PublisherUpdateRequest;
 import com.pairone.library.dto.publisher.Response.PublisherResponse;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 @Service
 public class PublisherService {
     private final PublisherRepository repository;
@@ -39,10 +40,16 @@ public class PublisherService {
                 .map(PublisherMapper::toResponse)
                 .orElse(null);
     }
+
     public List<PublisherResponse> getAll() {
         return repository.findAll().stream().map(PublisherMapper::toResponse).toList();
     }
+
     public void delete(Integer id) {
         repository.deleteById(id);
+    }
+
+    public Publisher bookServiceGetPublisher(Integer id) {
+        return repository.findById(id).orElseThrow(null);
     }
 }

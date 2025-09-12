@@ -4,7 +4,9 @@ import com.pairone.library.dto.publisher.Request.PublisherCreateRequest;
 import com.pairone.library.dto.publisher.Request.PublisherUpdateRequest;
 import com.pairone.library.dto.publisher.Response.PublisherResponse;
 import com.pairone.library.entity.Publisher;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PublisherMapper {
 
     // CreateRequest -> Entity

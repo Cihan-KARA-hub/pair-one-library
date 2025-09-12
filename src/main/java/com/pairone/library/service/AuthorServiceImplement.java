@@ -1,4 +1,5 @@
 package com.pairone.library.service;
+import com.pairone.library.mapper.AuthorMapper;
 import com.pairone.library.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,9 +12,11 @@ import com.pairone.library.entity.Author;
 public class AuthorServiceImplement implements AuthorService {
 
     private final AuthorRepository authorRepository;
+    private final AuthorMapper authorMapper;
 
-    public AuthorServiceImplement(AuthorRepository authorRepository) {
+    public AuthorServiceImplement(AuthorRepository authorRepository, AuthorMapper authorMapper) {
         this.authorRepository = authorRepository;
+        this.authorMapper = authorMapper;
     }
 
     @Override
@@ -22,7 +25,7 @@ public class AuthorServiceImplement implements AuthorService {
         author.setFirstname(dto.getFirstname());
         author.setLastname(dto.getLastname());
         Author saved = authorRepository.save(author);
-        return mapToDto(saved);
+        return authorMapper.mapToDto(saved);
     }
 
     @Override
@@ -31,7 +34,7 @@ public class AuthorServiceImplement implements AuthorService {
         author.setFirstname(dto.getFirstname());
         author.setLastname(dto.getLastname());
         Author updated = authorRepository.save(author);
-        return mapToDto(updated);
+        return authorMapper.mapToDto(updated);
     }
 
     @Override
@@ -41,19 +44,13 @@ public class AuthorServiceImplement implements AuthorService {
 
     @Override
     public AuthorDto getAuthorById(Integer id) {
-        return authorRepository.findById(id).map(this::mapToDto).orElse(null);
+        return authorRepository.findById(id).map(authorMapper::mapToDto).orElse(null);
     }
 
     @Override
     public List<AuthorDto> getAllAuthors() {
-        return authorRepository.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
+        return authorRepository.findAll().stream().map(authorMapper::mapToDto).collect(Collectors.toList());
     }
 
-    private AuthorDto mapToDto(Author author) {
-        AuthorDto dto = new AuthorDto();
-        dto.setAuthorId(author.getAuthorId());
-        dto.setFirstname(author.getFirstname());
-        dto.setLastname(author.getLastname());
-        return dto;
-    }
+
 }

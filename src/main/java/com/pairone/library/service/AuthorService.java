@@ -12,4 +12,5 @@ public interface AuthorService {
     void deleteAuthor(Integer id);
     AuthorDto getAuthorById(Integer id);
     List<AuthorDto> getAllAuthors();
+
 }

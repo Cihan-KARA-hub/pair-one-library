@@ -1,11 +1,12 @@
 package com.pairone.library.mapper;
 
 import com.pairone.library.dto.book.*;
-import com.pairone.library.entity.Author;
-import com.pairone.library.entity.Book;
+import com.pairone.library.entity.*;
 import com.pairone.library.service.AuthorService;
 import com.pairone.library.service.PublisherService;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class BookMapper {
@@ -17,15 +18,19 @@ public class BookMapper {
         this.authorService = authorService;
     }
 
-    public Book BookCreateReqToEntity(BookCreateReq bookCreateReq) {
+    public Book BookCreateReqToEntity(BookCreateReq req,
+                                      BookInfo bookInfo,
+                                      Publisher publisher,
+                                      List<Author> authors,
+                                      Category category) {
         Book book = new Book();
-        book.setName(bookCreateReq.getName());
-        book.setPageCount(bookCreateReq.getPageCount());
-        book.setEditionNo(bookCreateReq.getEditionNo());
-        book.setAuthors(bookCreateReq.getAuthorId());
-        book.setBookinfoId(bookCreateReq.getBookinfoId());
-        book.setPublisher(bookCreateReq.getPublisherId());
-        book.setCategory(bookCreateReq.getCategoryId());
+        book.setName(req.getName());
+        book.setPageCount(req.getPageCount());
+        book.setEditionNo(req.getEditionNo());
+        book.setBookinfoId(bookInfo);
+        book.setPublisher(publisher);
+        book.setCategory(category);
+        book.setAuthors(authors);
         return book;
     }
 

@@ -1,12 +1,12 @@
 package com.pairone.library.service;
 
 import com.pairone.library.dto.loan.*;
-import com.pairone.library.entity.Loan;
 import com.pairone.library.entity.Book;
+import com.pairone.library.entity.Loan;
 import com.pairone.library.entity.Member;
 import com.pairone.library.mapper.LoanMapper;
-import com.pairone.library.repository.LoanRepository;
 import com.pairone.library.repository.BookRepository;
+import com.pairone.library.repository.LoanRepository;
 import com.pairone.library.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
@@ -98,5 +98,9 @@ public class LoanService {
         dto.setDueDate(loan.getDueDate());
         dto.setStatus(loan.getStatus());
         return dto;
+    }
+
+    public Loan entityLoanById(Integer id) {
+        return loanRepository.findById(id).orElseThrow(() -> new RuntimeException(" not found loan"));
     }
 }

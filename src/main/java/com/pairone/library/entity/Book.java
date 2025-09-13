@@ -17,7 +17,7 @@ public class Book {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "page_count", nullable = false)

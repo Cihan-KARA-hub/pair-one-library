@@ -4,7 +4,6 @@ import com.pairone.library.dto.author.AuthorDto;
 import com.pairone.library.dto.book.*;
 import com.pairone.library.entity.*;
 import com.pairone.library.mapper.AuthorMapper;
-
 import com.pairone.library.mapper.BookMapper;
 import com.pairone.library.repository.BookRepository;
 import org.springframework.data.domain.Page;
@@ -68,7 +67,7 @@ public class BookServiceImpl implements BookService {
         Publisher publisher = publisherService.bookServiceGetPublisher(req.getPublisherId());
         Category category = categoryService.getCategoryId(req.getCategoryId());
         Book resBook = bookRepository.save(bookMapper.BookUpdateReqToEntity(req, bookInfo, publisher, authors, category));
-        return new BookUpdateRes(req.getName(), "Book Updated");
+        return new BookUpdateRes(req.getName(), resBook.getId() + "Book Updated");
     }
 
     public String delete(Integer id) {

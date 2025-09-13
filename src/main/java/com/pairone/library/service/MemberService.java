@@ -47,4 +47,8 @@ public class MemberService {
         }
         return dtos;
     }
+
+    public Member EntityMemberById(Integer id) {
+        return memberRepository.findById(id).orElseThrow(() -> new RuntimeException("not found member by id"));
+    }
 }

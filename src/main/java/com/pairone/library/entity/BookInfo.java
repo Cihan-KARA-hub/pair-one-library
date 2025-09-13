@@ -17,7 +17,7 @@ public class BookInfo {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int bookId;
+    private Integer bookId;
     @Column(name = "isbn", nullable = false)
     private String isbn;
     @Column(name = "title", length = 255)

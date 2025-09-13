@@ -1,7 +1,7 @@
 package com.pairone.library.controller;
 
 import com.pairone.library.dto.penalty.*;
-import com.pairone.library.service.PenaltyService;
+import com.pairone.library.service.PenaltyServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/penalty")
 public class PenaltyController {
-    private final PenaltyService penaltyService;
+    private final PenaltyServiceImpl penaltyServiceImpl;
 
-    public PenaltyController(PenaltyService penaltyService) {
-        this.penaltyService = penaltyService;
+    public PenaltyController(PenaltyServiceImpl penaltyServiceImpl) {
+        this.penaltyServiceImpl = penaltyServiceImpl;
     }
 
     @GetMapping
@@ -20,25 +20,25 @@ public class PenaltyController {
     public Page<PagePenaltyRes> getPenalties(@RequestParam int page,
                                              @RequestParam int size) {
 
-        return penaltyService.getPenalties(page, size);
+        return penaltyServiceImpl.getPenalties(page, size);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PenaltyCreateRes createPenalty(@RequestBody PenaltyCreateReq penalty) {
-        return penaltyService.createPenalty(penalty);
+        return penaltyServiceImpl.createPenalty(penalty);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public DeletePenaltyRes deletePenalty(@PathVariable int id) {
-        return penaltyService.deleteId(id);
+        return penaltyServiceImpl.deleteId(id);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PenaltyUpdateRes updatePenalty(@RequestBody PenaltyCreateReq penalty) {
-        return penaltyService.updatePenalty(penalty);
+        return penaltyServiceImpl.updatePenalty(penalty);
     }
 
 }

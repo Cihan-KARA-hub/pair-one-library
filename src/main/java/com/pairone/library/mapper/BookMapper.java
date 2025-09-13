@@ -2,19 +2,18 @@ package com.pairone.library.mapper;
 
 import com.pairone.library.dto.book.*;
 import com.pairone.library.entity.*;
-import com.pairone.library.service.AuthorService;
-import com.pairone.library.service.PublisherService;
+import com.pairone.library.service.PublisherServiceImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public class BookMapper {
-    private final PublisherService publisherService;
+    private final PublisherServiceImpl publisherServiceImpl;
     private final AuthorService authorService;
 
-    public BookMapper(PublisherService publisherService, AuthorService authorService) {
-        this.publisherService = publisherService;
+    public BookMapper(PublisherServiceImpl publisherServiceImpl, AuthorService authorService) {
+        this.publisherServiceImpl = publisherServiceImpl;
         this.authorService = authorService;
     }
 

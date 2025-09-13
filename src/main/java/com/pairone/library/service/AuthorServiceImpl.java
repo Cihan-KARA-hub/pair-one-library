@@ -1,6 +1,7 @@
 package com.pairone.library.service;
 import com.pairone.library.mapper.AuthorMapper;
 import com.pairone.library.repository.AuthorRepository;
+import com.pairone.library.service.abstractservice.AuthorService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,12 +10,12 @@ import com.pairone.library.entity.Author;
 //import com.pairone.library.repository.AuthorRepository;
 
 @Service
-public class AuthorServiceImplement implements AuthorService {
+public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
     private final AuthorMapper authorMapper;
 
-    public AuthorServiceImplement(AuthorRepository authorRepository, AuthorMapper authorMapper) {
+    public AuthorServiceImpl(AuthorRepository authorRepository, AuthorMapper authorMapper) {
         this.authorRepository = authorRepository;
         this.authorMapper = authorMapper;
     }

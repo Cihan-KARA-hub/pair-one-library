@@ -4,8 +4,11 @@ import com.pairone.library.dto.author.AuthorDto;
 import com.pairone.library.dto.book.*;
 import com.pairone.library.entity.*;
 import com.pairone.library.mapper.AuthorMapper;
+
 import com.pairone.library.mapper.BookMapper;
 import com.pairone.library.repository.BookRepository;
+import com.pairone.library.service.abstractservice.AuthorService;
+import com.pairone.library.service.abstractservice.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -24,8 +27,8 @@ public class BookServiceImpl implements BookService {
     private final AuthorService authorService;
     private final AuthorMapper authorMapper;
     private final BookInfoServiceImpl bookInfoService;
-    private final PublisherService publisherService;
-    private final CategoryService categoryService;
+    private final PublisherServiceImpl publisherServiceImpl;
+    private final CategoryServiceImpl categoryServiceImpl;
 
 
     public BookServiceImpl(BookRepository bookRepository,
@@ -33,14 +36,14 @@ public class BookServiceImpl implements BookService {
                            AuthorService authorService,
                            AuthorMapper authorMapper,
                            BookInfoServiceImpl bookInfoService,
-                           PublisherService publisherService, CategoryService categoryService) {
+                           PublisherServiceImpl publisherServiceImpl, CategoryServiceImpl categoryServiceImpl) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
         this.authorService = authorService;
         this.authorMapper = authorMapper;
         this.bookInfoService = bookInfoService;
-        this.publisherService = publisherService;
-        this.categoryService = categoryService;
+        this.publisherServiceImpl = publisherServiceImpl;
+        this.categoryServiceImpl = categoryServiceImpl;
     }
 
     @Transactional
@@ -50,8 +53,8 @@ public class BookServiceImpl implements BookService {
                 .toList();
         List<Author> authors = authorMapper.mapToEntityList(authorDtos);
         BookInfo bookInfo = bookInfoService.save(req.getBookinfoId());
-        Publisher publisher = publisherService.bookServiceGetPublisher(req.getPublisherId());
-        Category category = categoryService.getCategoryId(req.getCategoryId());
+        Publisher publisher = publisherServiceImpl.bookServiceGetPublisher(req.getPublisherId());
+        Category category = categoryServiceImpl.getCategoryId(req.getCategoryId());
         bookRepository.save(bookMapper.BookCreateReqToEntity(req, bookInfo, publisher, authors, category));
         return new BookCreateRes(req.getName(), "Book Created");
     }
@@ -64,10 +67,10 @@ public class BookServiceImpl implements BookService {
                 .toList();
         List<Author> authors = authorMapper.mapToEntityList(authorDtos);
         BookInfo bookInfo = bookInfoService.save(req.getBookinfoId());
-        Publisher publisher = publisherService.bookServiceGetPublisher(req.getPublisherId());
-        Category category = categoryService.getCategoryId(req.getCategoryId());
+        Publisher publisher = publisherServiceImpl.bookServiceGetPublisher(req.getPublisherId());
+        Category category = categoryServiceImpl.getCategoryId(req.getCategoryId());
         Book resBook = bookRepository.save(bookMapper.BookUpdateReqToEntity(req, bookInfo, publisher, authors, category));
-        return new BookUpdateRes(req.getName(), resBook.getId() + "Book Updated");
+        return new BookUpdateRes(req.getName(), resBook.getId()+ "Book Updated");
     }
 
     public String delete(Integer id) {

@@ -1,8 +1,8 @@
 package com.pairone.library.controller;
+import com.pairone.library.service.abstractservice.AuthorService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import com.pairone.library.dto.author.AuthorDto;
-import com.pairone.library.service.AuthorService;
 
 @RestController
 @RequestMapping("/api/authors")

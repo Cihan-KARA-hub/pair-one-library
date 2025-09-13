@@ -1,10 +1,8 @@
-package com.pairone.library.service;
-import java.util.List;
+package com.pairone.library.service.abstractservice;
+
 import com.pairone.library.dto.author.AuthorDto;
-import com.pairone.library.entity.Member;
-import com.pairone.library.entity.Author;
-import com.pairone.library.repository.AuthorRepository;
-import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 public interface AuthorService {
     AuthorDto createAuthor(AuthorDto dto);

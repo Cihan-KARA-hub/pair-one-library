@@ -5,12 +5,13 @@ import com.pairone.library.dto.bookinfo.BookInfoCreateDto;
 import com.pairone.library.entity.BookInfo;
 import com.pairone.library.mapper.BookInfoMapper;
 import com.pairone.library.repository.BookInfoRepository;
+import com.pairone.library.service.abstractservice.BookInfoService;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BookInfoServiceImpl {
+public class BookInfoServiceImpl implements BookInfoService {
     private final BookInfoRepository bookInfoRepository;
     private final BookInfoMapper bookInfoMapper;
 

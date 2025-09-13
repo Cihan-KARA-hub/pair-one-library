@@ -5,16 +5,17 @@ import com.pairone.library.dto.member.MemberListDto;
 import com.pairone.library.entity.Member;
 import com.pairone.library.entity.Role;
 import com.pairone.library.repository.MemberRepository;
+import com.pairone.library.service.abstractservice.MemberService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MemberService {
+public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository) {
+    public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 

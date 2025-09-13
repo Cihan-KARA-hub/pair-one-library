@@ -2,15 +2,14 @@ package com.pairone.library.service;
 
 import com.pairone.library.entity.Category;
 import com.pairone.library.repository.CategoryRepository;
+import com.pairone.library.service.abstractservice.CategoryService;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
-
 @Service
-public class CategoryService {
+public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 

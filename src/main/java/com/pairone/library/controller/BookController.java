@@ -4,7 +4,7 @@ import com.pairone.library.dto.book.BookCreateReq;
 import com.pairone.library.dto.book.BookCreateRes;
 import com.pairone.library.dto.book.BookListDto;
 import com.pairone.library.dto.book.BookUpdateReq;
-import com.pairone.library.service.BookService;
+import com.pairone.library.service.abstractservice.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

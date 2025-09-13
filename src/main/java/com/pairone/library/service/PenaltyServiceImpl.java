@@ -6,6 +6,7 @@ import com.pairone.library.entity.Member;
 import com.pairone.library.entity.Penalty;
 import com.pairone.library.mapper.PenaltyMapper;
 import com.pairone.library.repository.PenaltyRepository;
+import com.pairone.library.service.abstractservice.PenaltyService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,27 +14,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PenaltyService {
+public class PenaltyServiceImpl implements PenaltyService {
     private final PenaltyRepository penaltyRepository;
-    private final LoanService loanService;
-    private final MemberService memberService;
+    private final LoanServiceImpl loanServiceImpl;
+    private final MemberServiceImpl memberServiceImpl;
     private final PenaltyMapper penaltyMapper;
 
 
-    public PenaltyService(PenaltyRepository penaltyRepository,
-                          LoanService loanService,
-                          MemberService memberService,
-                          PenaltyMapper penaltyMapper) {
+    public PenaltyServiceImpl(PenaltyRepository penaltyRepository,
+                              LoanServiceImpl loanServiceImpl,
+                              MemberServiceImpl memberServiceImpl,
+                              PenaltyMapper penaltyMapper) {
         this.penaltyRepository = penaltyRepository;
-        this.loanService = loanService;
-        this.memberService = memberService;
+        this.loanServiceImpl = loanServiceImpl;
+        this.memberServiceImpl = memberServiceImpl;
         this.penaltyMapper = penaltyMapper;
     }
 
     @Transactional
     public PenaltyCreateRes createPenalty(PenaltyCreateReq penalty) {
-        Loan loan = loanService.entityLoanById(penalty.getLoanId());
-        Member member = memberService.EntityMemberById(penalty.getMemberId());
+        Loan loan = loanServiceImpl.entityLoanById(penalty.getLoanId());
+        Member member = memberServiceImpl.EntityMemberById(penalty.getMemberId());
         Penalty pen = penaltyRepository.save(penaltyMapper.createToEntity(penalty, loan, member));
         return new PenaltyCreateRes(pen.getId(), pen.getPenaltyType(), pen.getMember().getPhone(), "penalty created");
     }
@@ -53,8 +54,8 @@ public class PenaltyService {
 
     @Transactional
     public PenaltyUpdateRes updatePenalty(PenaltyCreateReq penalty) {
-        Loan loan = loanService.entityLoanById(penalty.getLoanId());
-        Member member = memberService.EntityMemberById(penalty.getMemberId());
+        Loan loan = loanServiceImpl.entityLoanById(penalty.getLoanId());
+        Member member = memberServiceImpl.EntityMemberById(penalty.getMemberId());
         Penalty pen = penaltyRepository.save(penaltyMapper.createToEntity(penalty, loan, member));
         return new PenaltyUpdateRes(pen.getId(), pen.getPenaltyType(), pen.getMember().getPhone(), "penalty update");
     }

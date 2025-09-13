@@ -1,4 +1,4 @@
-package com.pairone.library.service;
+package com.pairone.library.service.abstractservice;
 
 import com.pairone.library.dto.book.*;
 

@@ -3,7 +3,7 @@ package com.pairone.library.controller;
 import com.pairone.library.dto.publisher.Request.PublisherCreateRequest;
 import com.pairone.library.dto.publisher.Request.PublisherUpdateRequest;
 import com.pairone.library.dto.publisher.Response.PublisherResponse;
-import com.pairone.library.service.PublisherService;
+import com.pairone.library.service.PublisherServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +13,16 @@ import java.util.List;
 @RequestMapping("/api/v1/publishers")
 public class PublisherController {
 
-    private final PublisherService publisherService;
+    private final PublisherServiceImpl publisherServiceImpl;
 
-    public PublisherController(PublisherService publisherService) {
-        this.publisherService = publisherService;
+    public PublisherController(PublisherServiceImpl publisherServiceImpl) {
+        this.publisherServiceImpl = publisherServiceImpl;
     }
 
 
     @PostMapping
     public ResponseEntity<PublisherResponse> createPublisher(@RequestBody PublisherCreateRequest request) {
-        PublisherResponse response = publisherService.create(request);
+        PublisherResponse response = publisherServiceImpl.create(request);
         return ResponseEntity.ok(response);
     }
 
@@ -31,7 +31,7 @@ public class PublisherController {
     public ResponseEntity<PublisherResponse> updatePublisher(
             @PathVariable Integer id,
             @RequestBody PublisherUpdateRequest request) {
-        PublisherResponse response = publisherService.update(id, request);
+        PublisherResponse response = publisherServiceImpl.update(id, request);
         if (response == null) {
             return ResponseEntity.notFound().build();
         }
@@ -41,7 +41,7 @@ public class PublisherController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PublisherResponse> getPublisherById(@PathVariable Integer id) {
-        PublisherResponse response = publisherService.getById(id);
+        PublisherResponse response = publisherServiceImpl.getById(id);
         if (response == null) {
             return ResponseEntity.notFound().build();
         }
@@ -50,14 +50,14 @@ public class PublisherController {
 
     @GetMapping
     public ResponseEntity<List<PublisherResponse>> getAllPublishers() {
-        List<PublisherResponse> publishers = publisherService.getAll();
+        List<PublisherResponse> publishers = publisherServiceImpl.getAll();
         return ResponseEntity.ok(publishers);
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePublisher(@PathVariable Integer id) {
-        publisherService.delete(id);
+        publisherServiceImpl.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
